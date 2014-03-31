@@ -14,8 +14,8 @@ import java.awt.event.*;
 public class GUI extends JFrame implements ActionListener
 {
     private static final long serialVersionUID = 2L;
-    private Parser     calc = new Parser();
     private boolean trigger = false;
+    private Parser mathParser;
     private int currentWidth;
     private int currentHeight;
     private int secretHeight;
@@ -78,6 +78,14 @@ public class GUI extends JFrame implements ActionListener
             }
                 }
         });
+    }
+
+    public Parser getMathParser() {
+        return mathParser;
+    }
+
+    public void setMathParser(Parser mathParser) {
+        this.mathParser = mathParser;
     }
 
     private Image getImageIcon()
@@ -478,10 +486,15 @@ public class GUI extends JFrame implements ActionListener
         }
     }
 
-    private void calculateButton()
+    public void calculateButton()
     {
         String str = inputText.getText();
-        outputText.setText(calc.calculate(str));
+        outputText.setText(mathParser.calculate(str));
+    }
+
+    public String getOutputText()
+    {
+        return outputText.getText();
     }
 
     private void moreButton()
@@ -547,22 +560,23 @@ public class GUI extends JFrame implements ActionListener
 
     private void checkBox(String str)
     {
+        str = str.toLowerCase();
         degreeCheckbox.setSelected(false);
         radianCheckbox.setSelected(false);
         gradusCheckbox.setSelected(false);
-        if(str.intern() == "degree".intern())
+        if(str.equals("degree"))
         {
-            calc.setTangentUnit(ParserType.DEGREE);
+            mathParser.setTangentUnit(ParserType.DEGREE);
             degreeCheckbox.setSelected(true);
         }
-        else if(str.intern() == "gradus".intern())
+        else if(str.equals("gradus"))
         {
-            calc.setTangentUnit(ParserType.GRADUS);
+            mathParser.setTangentUnit(ParserType.GRADUS);
             gradusCheckbox.setSelected(true);
         }
-        else if(str.intern() == "radian".intern())
+        else if(str.equals("radian"))
         {
-            calc.setTangentUnit(ParserType.RADIAN);
+            mathParser.setTangentUnit(ParserType.RADIAN);
             radianCheckbox.setSelected(true);
         }
     }

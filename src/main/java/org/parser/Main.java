@@ -1,5 +1,6 @@
 package org.parser;
 
+import org.parser.model.Parser;
 import org.parser.view.GUI;
 
 /**
@@ -14,6 +15,8 @@ public class Main
      **/
     public static void main(String[] args)
     {
-        new GUI();
+        Parser mathParser = new Parser();
+        GUI instance = new GUI();
+        instance.setMathParser(mathParser);
     }
 }
