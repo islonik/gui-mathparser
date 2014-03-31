@@ -13,7 +13,6 @@ import java.awt.event.*;
  */
 public class GUI extends JFrame implements ActionListener
 {
-    private static final long serialVersionUID = 2L;
     private boolean trigger = false;
     private Parser mathParser;
     private int currentWidth;
